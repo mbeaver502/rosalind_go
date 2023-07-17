@@ -15,8 +15,8 @@ const (
 )
 
 // Convert the given string s into a slice of Nucleotide.
-func ToSlice(s string) []Nucleotide {
-	nts := []Nucleotide{}
+func ToSlice(s string) NucleotideSequence {
+	nts := NucleotideSequence{}
 	for _, n := range s {
 		nt := Nucleotide(n)
 		switch nt {
