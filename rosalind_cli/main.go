@@ -7,8 +7,11 @@ import (
 )
 
 func main() {
-	s := "ACGT"
-	d := dna.New(s)
+	s := "ACGTaCgTAcGt"
+	d, err := dna.New(s)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	log.Printf("input:  %s\n", d)
 	log.Printf("output: %s\n", d.CountNucleotidesString())

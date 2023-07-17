@@ -1,7 +1,9 @@
 package dna
 
 import (
+	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -20,11 +22,24 @@ const (
 	NucleotideT = Nucleotide('T')
 )
 
+var ErrInvalidDnaInput = errors.New("dna: invalid input string")
+
 // New creates a new Dna instance and returns a pointer to it.
-func New(s string) *Dna {
+func New(s string) (*Dna, error) {
+	if !isValidString(s) {
+		return nil, ErrInvalidDnaInput
+	}
+
 	return &Dna{
 		Dna: strings.ToUpper(s),
-	}
+	}, nil
+}
+
+// Determine whether the given string contains only
+// valid character representations of DNA nucleotides.
+func isValidString(s string) bool {
+	rex := regexp.MustCompile(`^[aAcCgGtT]+$`)
+	return rex.MatchString(s)
 }
 
 // String returns a string version of the Dna instance.
