@@ -6,17 +6,17 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
+	nt "github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
 	"github.com/mbeaver502/rosalind_go/rosalind_lib/rna"
 )
 
 // Dna represents a strand of DNA.
 type Dna struct {
 	Dna string
-	dna nucleotide.NucleotideSequence
+	dna nt.NucleotideSequence
 }
 
-type NucleotideCounts map[nucleotide.Nucleotide]uint
+type NucleotideCounts map[nt.Nucleotide]uint
 
 // ErrInvalidDnaInput indicates that the provided string
 // represents an invalid sequence of characters and
@@ -33,7 +33,7 @@ func New(s string) (*Dna, error) {
 
 	return &Dna{
 		Dna: su,
-		dna: nucleotide.ToSlice(su),
+		dna: nt.ToSlice(su),
 	}, nil
 }
 
@@ -57,13 +57,13 @@ func (d *Dna) CountNucleotides() NucleotideCounts {
 // CountNucleotidesString counts the number of nucleotides in the Dna instance
 // and returns the result in a pretty-printed string.
 func (d *Dna) CountNucleotidesString() string {
-	nt := d.countNucleotides()
+	counts := d.countNucleotides()
 	return fmt.Sprintf(
 		"%d %d %d %d",
-		nt[nucleotide.Adenine],
-		nt[nucleotide.Cytosine],
-		nt[nucleotide.Guanine],
-		nt[nucleotide.Thymine],
+		counts[nt.Adenine],
+		counts[nt.Cytosine],
+		counts[nt.Guanine],
+		counts[nt.Thymine],
 	)
 }
 
@@ -71,22 +71,50 @@ func (d *Dna) CountNucleotidesString() string {
 // If the given instance is nil, all counts default to
 // zero values.
 func (d *Dna) countNucleotides() NucleotideCounts {
-	nt := make(NucleotideCounts)
+	counts := make(NucleotideCounts)
 	if d == nil {
-		return nt
+		return counts
 	}
 
 	for _, n := range d.Dna {
-		m := nucleotide.Nucleotide(n)
+		m := nt.Nucleotide(n)
 		switch m {
-		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Thymine:
-			nt[m]++
+		case nt.Adenine, nt.Cytosine, nt.Guanine, nt.Thymine:
+			counts[m]++
 		}
 	}
-	return nt
+	return counts
 }
 
 // Transcribe produces an Rna instance from the given Dna instance.
 func (d *Dna) Transcribe() (*rna.Rna, error) {
 	return rna.TranscribeFromDna(d.dna)
+}
+
+func (d *Dna) ReverseComplement() nt.NucleotideSequence {
+	mapping := make(map[nt.Nucleotide]nt.Nucleotide)
+	mapping[nt.Adenine] = nt.Thymine
+	mapping[nt.Thymine] = nt.Adenine
+	mapping[nt.Cytosine] = nt.Guanine
+	mapping[nt.Guanine] = nt.Cytosine
+
+	return reverseComplement(d.dna, mapping, complementFunc)
+}
+
+func reverseComplement(
+	ns nt.NucleotideSequence,
+	mapping map[nt.Nucleotide]nt.Nucleotide,
+	complement func(nt.Nucleotide, map[nt.Nucleotide]nt.Nucleotide) nt.Nucleotide,
+) nt.NucleotideSequence {
+	rc := make(nt.NucleotideSequence, len(ns))
+	pos := 0
+	for i := len(ns) - 1; i >= 0; i-- {
+		rc[pos] = complement(ns[i], mapping)
+		pos++
+	}
+	return rc
+}
+
+func complementFunc(nt nt.Nucleotide, mapping map[nt.Nucleotide]nt.Nucleotide) nt.Nucleotide {
+	return mapping[nt]
 }
