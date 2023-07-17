@@ -29,7 +29,7 @@ func New(s string) (*Rna, error) {
 
 	return &Rna{
 		Rna: su,
-		rna: toNucleotideSlice(su),
+		rna: nucleotide.ToSlice(su),
 	}, nil
 }
 
@@ -56,19 +56,6 @@ func TranscribeFromDna(d []nucleotide.Nucleotide) (*Rna, error) {
 func isValidString(s string) bool {
 	rex := regexp.MustCompile(`^[aAcCgGuU]+$`)
 	return rex.MatchString(s)
-}
-
-// Convert the given string s into a slice of Nucleotide.
-func toNucleotideSlice(s string) []nucleotide.Nucleotide {
-	nts := make([]nucleotide.Nucleotide, len(s))
-	for i, n := range s {
-		nt := nucleotide.Nucleotide(n)
-		switch nt {
-		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Uracil:
-			nts[i] = nt
-		}
-	}
-	return nts
 }
 
 // String returns a string version of the Rna instance.

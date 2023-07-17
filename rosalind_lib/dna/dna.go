@@ -31,7 +31,7 @@ func New(s string) (*Dna, error) {
 
 	return &Dna{
 		Dna: su,
-		dna: toNucleotideSlice(su),
+		dna: nucleotide.ToSlice(su),
 	}, nil
 }
 
@@ -40,22 +40,6 @@ func New(s string) (*Dna, error) {
 func isValidString(s string) bool {
 	rex := regexp.MustCompile(`^[aAcCgGtT]+$`)
 	return rex.MatchString(s)
-}
-
-// Convert the given string s into a slice of Nucleotide.
-func toNucleotideSlice(s string) []nucleotide.Nucleotide {
-	// len(s) will give us the number of bytes
-	// instead of the number of runes, but
-	// since our runes are in ASCII, this is okay.
-	nts := make([]nucleotide.Nucleotide, len(s))
-	for i, n := range s {
-		nt := nucleotide.Nucleotide(n)
-		switch nt {
-		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Thymine:
-			nts[i] = nt
-		}
-	}
-	return nts
 }
 
 // String returns a string version of the Dna instance.
