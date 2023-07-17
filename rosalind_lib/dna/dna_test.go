@@ -73,4 +73,3 @@ func Test_Dna_CountNucleotides(t *testing.T) {
 		}
 	}
 }
-
