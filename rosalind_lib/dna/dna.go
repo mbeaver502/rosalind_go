@@ -95,7 +95,7 @@ func reverseComplement(ns nucleotide.Sequence, mapping nucleotide.Mapping) nucle
 	rc := make(nucleotide.Sequence, len(ns))
 	pos := 0
 	for i := len(ns) - 1; i >= 0; i-- {
-		rc[pos] = mapping[ns[i]]
+		rc[pos] = mapping.Transform(ns[i])
 		pos++
 	}
 	return rc
