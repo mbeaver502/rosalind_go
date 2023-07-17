@@ -26,7 +26,7 @@ type argument struct {
 	options *argparse.Options
 }
 
-var arguments = map[string]argument{
+var arguments = map[string]*argument{
 	"problem": {
 		short: "p",
 		long:  "problem",
