@@ -32,7 +32,7 @@ var arguments = map[string]*argument{
 }
 
 // Validate the provided problem argument
-// by ensure it exists in our problem map.
+// by ensuring it exists in our problem map.
 func problemArgValidator(args []string) error {
 	for _, arg := range args {
 		if _, found := problems.RosalindProblems[arg]; !found {
