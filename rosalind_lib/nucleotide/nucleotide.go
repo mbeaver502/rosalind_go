@@ -26,3 +26,11 @@ func ToSlice(s string) NucleotideSequence {
 	}
 	return nts
 }
+
+func (ns NucleotideSequence) String() string {
+	return string(ns)
+}
+
+func (nt Nucleotide) String() string {
+	return string(nt)
+}
