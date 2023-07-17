@@ -20,22 +20,30 @@ var rosalindProblems = map[string]func(){
 	"revc": ProblemRevc,
 }
 
+type argument struct {
+	short   string
+	long    string
+	options *argparse.Options
+}
+
+var arguments = map[string]argument{
+	"problem": {
+		short: "p",
+		long:  "problem",
+		options: &argparse.Options{
+			Required: true,
+			Validate: problemArgValidator,
+			Help:     `Specify the Rosalind problem in lowercase (identified at the end of the URL, e.g., https://rosalind.info/problems/dna/ => "dna")`,
+			Default:  nil,
+		},
+	},
+}
+
 func main() {
 	parser := argparse.NewParser(progName, progDesc)
 
-	problem := parser.String("p", "problem", &argparse.Options{
-		Required: true,
-		Validate: func(args []string) error {
-			for _, arg := range args {
-				if _, found := rosalindProblems[arg]; !found {
-					return errors.New("invalid problem")
-				}
-			}
-			return nil
-		},
-		Help:    `Specify the Rosalind problem in lowercase (identified at the end of the URL, e.g., https://rosalind.info/problems/dna/ => "dna")`,
-		Default: nil,
-	})
+	probArg := arguments["problem"]
+	problem := parser.String(probArg.short, probArg.long, probArg.options)
 
 	err := parser.Parse(os.Args)
 	if err != nil {
@@ -43,7 +51,20 @@ func main() {
 		return
 	}
 
+	// Problem is a required argument,
+	// so need to do a nil-check. Hopefully.
 	rosalindProblems[*problem]()
+}
+
+// Validate the provided problem argument
+// by ensure it exists in our problem map.
+func problemArgValidator(args []string) error {
+	for _, arg := range args {
+		if _, found := rosalindProblems[arg]; !found {
+			return errors.New("invalid problem")
+		}
+	}
+	return nil
 }
 
 // TODO: Implement DNA problem
