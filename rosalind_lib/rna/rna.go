@@ -14,7 +14,7 @@ type Rna struct {
 	rna []nucleotide.Nucleotide
 }
 
-// ErrInvalidDnaInput indicates that the provided string
+// ErrInvalidRnaInput indicates that the provided string
 // represents an invalid sequence of characters and
 // cannot constitute a valid RNA sequence.
 var ErrInvalidRnaInput = errors.New("rna: invalid input string")
