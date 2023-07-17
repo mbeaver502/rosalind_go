@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	s := "GATGGAACTTGACTACGTAAATT"
+	s := "AAAACCCGGT"
 	d, err := dna.New(s)
 	if err != nil {
 		log.Fatalln(err)
@@ -20,4 +20,5 @@ func main() {
 
 	log.Printf("dna: %s\n", d)
 	log.Printf("rna: %s\n", r)
+	log.Printf("rc:  %s\n", d.ReverseComplement())
 }
