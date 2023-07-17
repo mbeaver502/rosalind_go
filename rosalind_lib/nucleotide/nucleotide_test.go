@@ -1,6 +1,9 @@
 package nucleotide
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 func Test_Nucleotide(t *testing.T) {
 	nt := Adenine
@@ -22,5 +25,41 @@ func Test_Nucleotide(t *testing.T) {
 	nt = Uracil
 	if nt != 'U' {
 		t.Errorf("FAIL: Uracil is not 'U'. want 'U'; got '%s'", string(nt))
+	}
+}
+
+func Test_Nucleotide_ToSlice(t *testing.T) {
+	tests := []struct {
+		testName string
+		input    string
+		want     []Nucleotide
+	}{
+		{
+			testName: "valid nucleotide bases",
+			input:    "ACGTU",
+			want:     []Nucleotide{Adenine, Cytosine, Guanine, Thymine, Uracil},
+		},
+		{
+			testName: "invalid nucleotide bases",
+			input:    "XYZ",
+			want:     []Nucleotide{},
+		},
+		{
+			testName: "mix of valid and invalid",
+			input:    "ACGXYZTU",
+			want:     []Nucleotide{Adenine, Cytosine, Guanine, Thymine, Uracil},
+		},
+		{
+			testName: "empty input",
+			input:    "",
+			want:     []Nucleotide{},
+		},
+	}
+
+	for _, test := range tests {
+		got := ToSlice(test.input)
+		if !reflect.DeepEqual(got, test.want) {
+			t.Errorf("FAIL %s: slice lengths do not match. want %+v; got %+v", test.testName, test.want, got)
+		}
 	}
 }
