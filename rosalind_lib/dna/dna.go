@@ -2,7 +2,6 @@ package dna
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
 	"strings"
 
@@ -55,14 +54,7 @@ func (d *Dna) CountNucleotides() nt.NucleotideCounts {
 // CountNucleotidesString counts the number of nucleotides in the Dna instance
 // and returns the result in a pretty-printed string.
 func (d *Dna) CountNucleotidesString() string {
-	counts := d.countNucleotides()
-	return fmt.Sprintf(
-		"%d %d %d %d",
-		counts[nt.Adenine],
-		counts[nt.Cytosine],
-		counts[nt.Guanine],
-		counts[nt.Thymine],
-	)
+	return d.CountNucleotides().String()
 }
 
 // Count the number of nucleotides in the Dna instance.
