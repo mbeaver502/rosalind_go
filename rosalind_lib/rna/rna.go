@@ -5,13 +5,13 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
+	nt "github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
 )
 
 // Rna represents a strand of RNA.
 type Rna struct {
 	Rna string
-	rna nucleotide.NucleotideSequence
+	rna nt.NucleotideSequence
 }
 
 // ErrInvalidRnaInput indicates that the provided string
@@ -29,25 +29,25 @@ func New(s string) (*Rna, error) {
 
 	return &Rna{
 		Rna: su,
-		rna: nucleotide.ToSlice(su),
+		rna: nt.ToSlice(su),
 	}, nil
 }
 
 // NewFromDna creates a new Rna instance from the given slice of Nucleotides.
-func TranscribeFromDna(d nucleotide.NucleotideSequence) (*Rna, error) {
-	nt := make(nucleotide.NucleotideSequence, len(d))
+func TranscribeFromDna(d nt.NucleotideSequence) (*Rna, error) {
+	transcribed := make(nt.NucleotideSequence, len(d))
 	for i, n := range d {
 		switch n {
-		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine:
-			nt[i] = n
-		case nucleotide.Thymine:
-			nt[i] = nucleotide.Uracil
+		case nt.Adenine, nt.Cytosine, nt.Guanine:
+			transcribed[i] = n
+		case nt.Thymine:
+			transcribed[i] = nt.Uracil
 		}
 	}
 
 	return &Rna{
-		Rna: string(nt),
-		rna: nt,
+		Rna: string(transcribed),
+		rna: transcribed,
 	}, nil
 }
 
