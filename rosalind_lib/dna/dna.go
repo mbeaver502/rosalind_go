@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
+	"github.com/mbeaver502/rosalind_go/rosalind_lib/rna"
 )
 
 // Dna represents a strand of DNA.
@@ -97,4 +98,9 @@ func (d *Dna) countNucleotides() map[nucleotide.Nucleotide]uint {
 		}
 	}
 	return nt
+}
+
+// Transcribe produces an Rna instance from the given Dna instance.
+func (d *Dna) Transcribe() (*rna.Rna, error) {
+	return rna.TranscribeFromDna(d.dna)
 }
