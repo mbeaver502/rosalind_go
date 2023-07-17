@@ -10,6 +10,7 @@ import (
 // Dna represents a strand of DNA.
 type Dna struct {
 	Dna string
+	dna []Nucleotide
 }
 
 // Nucleotide represents a single nucleotide in a DNA sequence.
@@ -35,6 +36,7 @@ func New(s string) (*Dna, error) {
 
 	return &Dna{
 		Dna: strings.ToUpper(s),
+		dna: toNucleotideSlice(s),
 	}, nil
 }
 
@@ -43,6 +45,22 @@ func New(s string) (*Dna, error) {
 func isValidString(s string) bool {
 	rex := regexp.MustCompile(`^[aAcCgGtT]+$`)
 	return rex.MatchString(s)
+}
+
+// Convert the given string s into a slice of Nucleotide.
+func toNucleotideSlice(s string) []Nucleotide {
+	// len(s) will give us the number of bytes
+	// instead of the number of runes, but
+	// since our runes are in ASCII, this is okay.
+	nts := make([]Nucleotide, len(s))
+	for i, n := range s {
+		nt := Nucleotide(n)
+		switch nt {
+		case NucleotideA, NucleotideC, NucleotideG, NucleotideT:
+			nts[i] = nt
+		}
+	}
+	return nts
 }
 
 // String returns a string version of the Dna instance.
