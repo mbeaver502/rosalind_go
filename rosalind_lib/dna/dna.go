@@ -16,6 +16,8 @@ type Dna struct {
 	dna nucleotide.NucleotideSequence
 }
 
+type NucleotideCounts map[nucleotide.Nucleotide]uint
+
 // ErrInvalidDnaInput indicates that the provided string
 // represents an invalid sequence of characters and
 // cannot constitute a valid DNA sequence.
@@ -48,7 +50,7 @@ func (d *Dna) String() string {
 }
 
 // CountNucleotides counts the number of nucleotides in the Dna instance.
-func (d *Dna) CountNucleotides() map[nucleotide.Nucleotide]uint {
+func (d *Dna) CountNucleotides() NucleotideCounts {
 	return d.countNucleotides()
 }
 
@@ -68,8 +70,8 @@ func (d *Dna) CountNucleotidesString() string {
 // Count the number of nucleotides in the Dna instance.
 // If the given instance is nil, all counts default to
 // zero values.
-func (d *Dna) countNucleotides() map[nucleotide.Nucleotide]uint {
-	nt := make(map[nucleotide.Nucleotide]uint)
+func (d *Dna) countNucleotides() NucleotideCounts {
+	nt := make(NucleotideCounts)
 	if d == nil {
 		return nt
 	}
