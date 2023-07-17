@@ -33,7 +33,7 @@ func New(s string) (*Rna, error) {
 	}, nil
 }
 
-// NewFromDna creates a new Rna instance from the given Dna instance.
+// NewFromDna creates a new Rna instance from the given slice of Nucleotides.
 func TranscribeFromDna(d []nucleotide.Nucleotide) (*Rna, error) {
 	nt := make([]nucleotide.Nucleotide, len(d))
 	for i, n := range d {
