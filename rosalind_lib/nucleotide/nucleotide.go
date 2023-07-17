@@ -1,5 +1,10 @@
 package nucleotide
 
+import (
+	"fmt"
+	"strings"
+)
+
 // Nucleotide represents a single nucleotide in a DNA sequence.
 type Nucleotide rune
 
@@ -35,10 +40,33 @@ func ToSlice(s string) NucleotideSequence {
 	return nts
 }
 
+// String returns the string representation of the NucleotideSequence.
 func (ns NucleotideSequence) String() string {
 	return string(ns)
 }
 
+// String returns the string representation of the Nucleotide.
 func (nt Nucleotide) String() string {
 	return string(nt)
+}
+
+// String returns a pretty printed representation of the NucleotideCounts.
+// Currently only returns DNA nucleotides.
+func (nc NucleotideCounts) String() string {
+	return fmt.Sprintf(
+		"%d %d %d %d",
+		nc[Adenine],
+		nc[Cytosine],
+		nc[Guanine],
+		nc[Thymine],
+	)
+}
+
+// String returns a pretty printed representation of the NucleotideMapping.
+func (nm NucleotideMapping) String() string {
+	var sb strings.Builder
+	for k, v := range nm {
+		sb.WriteString(fmt.Sprintf("%s -> %s, ", k, v))
+	}
+	return fmt.Sprintf("{%s}", strings.TrimRight(sb.String(), ", "))
 }
