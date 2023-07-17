@@ -74,21 +74,3 @@ func Test_Dna_CountNucleotides(t *testing.T) {
 	}
 }
 
-func Test_Nucleotide(t *testing.T) {
-	nt := NucleotideA
-	if nt != 'A' {
-		t.Errorf("FAIL: NucleotideA is not 'A'. want 'A'; got '%s'", string(nt))
-	}
-	nt = NucleotideC
-	if nt != 'C' {
-		t.Errorf("FAIL: NucleotideC is not 'C'. want 'C'; got '%s'", string(nt))
-	}
-	nt = NucleotideG
-	if nt != 'G' {
-		t.Errorf("FAIL: NucleotideG is not 'G'. want 'G'; got '%s'", string(nt))
-	}
-	nt = NucleotideT
-	if nt != 'T' {
-		t.Errorf("FAIL: NucleotideT is not 'T'. want 'T'; got '%s'", string(nt))
-	}
-}

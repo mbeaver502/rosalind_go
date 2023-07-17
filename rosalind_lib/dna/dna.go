@@ -5,23 +5,15 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
 )
 
 // Dna represents a strand of DNA.
 type Dna struct {
 	Dna string
-	dna []Nucleotide
+	dna []nucleotide.Nucleotide
 }
-
-// Nucleotide represents a single nucleotide in a DNA sequence.
-type Nucleotide rune
-
-const (
-	NucleotideA = Nucleotide('A')
-	NucleotideC = Nucleotide('C')
-	NucleotideG = Nucleotide('G')
-	NucleotideT = Nucleotide('T')
-)
 
 // ErrInvalidDnaInput indicates that the provided string
 // represents an invalid sequence of characters and
@@ -50,15 +42,15 @@ func isValidString(s string) bool {
 }
 
 // Convert the given string s into a slice of Nucleotide.
-func toNucleotideSlice(s string) []Nucleotide {
+func toNucleotideSlice(s string) []nucleotide.Nucleotide {
 	// len(s) will give us the number of bytes
 	// instead of the number of runes, but
 	// since our runes are in ASCII, this is okay.
-	nts := make([]Nucleotide, len(s))
+	nts := make([]nucleotide.Nucleotide, len(s))
 	for i, n := range s {
-		nt := Nucleotide(n)
+		nt := nucleotide.Nucleotide(n)
 		switch nt {
-		case NucleotideA, NucleotideC, NucleotideG, NucleotideT:
+		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Thymine:
 			nts[i] = nt
 		}
 	}
@@ -71,7 +63,7 @@ func (d *Dna) String() string {
 }
 
 // CountNucleotides counts the number of nucleotides in the Dna instance.
-func (d *Dna) CountNucleotides() map[Nucleotide]uint {
+func (d *Dna) CountNucleotides() map[nucleotide.Nucleotide]uint {
 	return d.countNucleotides()
 }
 
@@ -81,26 +73,26 @@ func (d *Dna) CountNucleotidesString() string {
 	nt := d.countNucleotides()
 	return fmt.Sprintf(
 		"%d %d %d %d",
-		nt[NucleotideA],
-		nt[NucleotideC],
-		nt[NucleotideG],
-		nt[NucleotideT],
+		nt[nucleotide.Adenine],
+		nt[nucleotide.Cytosine],
+		nt[nucleotide.Guanine],
+		nt[nucleotide.Thymine],
 	)
 }
 
 // Count the number of nucleotides in the Dna instance.
 // If the given instance is nil, all counts default to
 // zero values.
-func (d *Dna) countNucleotides() map[Nucleotide]uint {
-	nt := make(map[Nucleotide]uint)
+func (d *Dna) countNucleotides() map[nucleotide.Nucleotide]uint {
+	nt := make(map[nucleotide.Nucleotide]uint)
 	if d == nil {
 		return nt
 	}
 
 	for _, n := range d.Dna {
-		m := Nucleotide(n)
+		m := nucleotide.Nucleotide(n)
 		switch m {
-		case NucleotideA, NucleotideC, NucleotideG, NucleotideT:
+		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Thymine:
 			nt[m]++
 		}
 	}
