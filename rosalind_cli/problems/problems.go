@@ -8,6 +8,6 @@ var RosalindProblems = map[string]func(){
 
 func Do(prob *string) {
 	// Problem is a required argument,
-	// so need to do a nil-check. Hopefully.
+	// so no need to do a nil-check. Hopefully.
 	RosalindProblems[*prob]()
 }
