@@ -8,16 +8,16 @@ import (
 // Nucleotide represents a single nucleotide in a DNA sequence.
 type Nucleotide rune
 
-// NucleotideSequence represents a sequence of zero or more Nucleotides.
-type NucleotideSequence []Nucleotide
+// Sequence represents a sequence of zero or more Nucleotides.
+type Sequence []Nucleotide
 
-// NucleotideCounts maps the number of appearances of Nucleotides.
+// Counts maps the number of appearances of Nucleotides.
 // Example: counts['A'] = 5
-type NucleotideCounts map[Nucleotide]uint
+type Counts map[Nucleotide]uint
 
-// NucleotideMapping maps one Nucleotide to another.
+// Mapping maps one Nucleotide to another.
 // Example: 'A' -> 'T'
-type NucleotideMapping map[Nucleotide]Nucleotide
+type Mapping map[Nucleotide]Nucleotide
 
 const (
 	Adenine  = Nucleotide('A')
@@ -28,8 +28,8 @@ const (
 )
 
 // Convert the given string s into a slice of Nucleotide.
-func ToSlice(s string) NucleotideSequence {
-	nts := NucleotideSequence{}
+func ToSlice(s string) Sequence {
+	nts := Sequence{}
 	for _, n := range s {
 		nt := Nucleotide(n)
 		switch nt {
@@ -41,7 +41,7 @@ func ToSlice(s string) NucleotideSequence {
 }
 
 // String returns the string representation of the NucleotideSequence.
-func (ns NucleotideSequence) String() string {
+func (ns Sequence) String() string {
 	return string(ns)
 }
 
@@ -52,7 +52,7 @@ func (nt Nucleotide) String() string {
 
 // String returns a pretty printed representation of the NucleotideCounts.
 // Currently only returns DNA nucleotides.
-func (nc NucleotideCounts) String() string {
+func (nc Counts) String() string {
 	return fmt.Sprintf(
 		"%d %d %d %d",
 		nc[Adenine],
@@ -63,7 +63,7 @@ func (nc NucleotideCounts) String() string {
 }
 
 // String returns a pretty printed representation of the NucleotideMapping.
-func (nm NucleotideMapping) String() string {
+func (nm Mapping) String() string {
 	var sb strings.Builder
 	for k, v := range nm {
 		sb.WriteString(fmt.Sprintf("%s -> %s, ", k, v))

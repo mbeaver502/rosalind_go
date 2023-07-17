@@ -32,27 +32,27 @@ func Test_Nucleotide_ToSlice(t *testing.T) {
 	tests := []struct {
 		testName string
 		input    string
-		want     NucleotideSequence
+		want     Sequence
 	}{
 		{
 			testName: "valid nucleotide bases",
 			input:    "ACGTU",
-			want:     NucleotideSequence{Adenine, Cytosine, Guanine, Thymine, Uracil},
+			want:     Sequence{Adenine, Cytosine, Guanine, Thymine, Uracil},
 		},
 		{
 			testName: "invalid nucleotide bases",
 			input:    "XYZ",
-			want:     NucleotideSequence{},
+			want:     Sequence{},
 		},
 		{
 			testName: "mix of valid and invalid",
 			input:    "ACGXYZTU",
-			want:     NucleotideSequence{Adenine, Cytosine, Guanine, Thymine, Uracil},
+			want:     Sequence{Adenine, Cytosine, Guanine, Thymine, Uracil},
 		},
 		{
 			testName: "empty input",
 			input:    "",
-			want:     NucleotideSequence{},
+			want:     Sequence{},
 		},
 	}
 
