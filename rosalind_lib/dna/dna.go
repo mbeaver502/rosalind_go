@@ -104,24 +104,15 @@ func (d *Dna) ReverseComplement() nt.NucleotideSequence {
 			nt.Thymine:  nt.Adenine,
 			nt.Cytosine: nt.Guanine,
 			nt.Guanine:  nt.Cytosine,
-		},
-		complementFunc)
+		})
 }
 
-func reverseComplement(
-	ns nt.NucleotideSequence,
-	mapping NucleotideMapping,
-	complement func(nt.Nucleotide, NucleotideMapping) nt.Nucleotide,
-) nt.NucleotideSequence {
+func reverseComplement(ns nt.NucleotideSequence, mapping NucleotideMapping) nt.NucleotideSequence {
 	rc := make(nt.NucleotideSequence, len(ns))
 	pos := 0
 	for i := len(ns) - 1; i >= 0; i-- {
-		rc[pos] = complement(ns[i], mapping)
+		rc[pos] = mapping[ns[i]]
 		pos++
 	}
 	return rc
-}
-
-func complementFunc(nt nt.Nucleotide, mapping NucleotideMapping) nt.Nucleotide {
-	return mapping[nt]
 }
