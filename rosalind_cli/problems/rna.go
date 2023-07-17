@@ -4,6 +4,6 @@ import "log"
 
 // TODO: Implement RNA problem
 // https://rosalind.info/problems/rna/
-func ProblemRna() {
+func problemRna() {
 	log.Println("RNA problem")
 }

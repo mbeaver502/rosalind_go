@@ -1,7 +1,7 @@
 package problems
 
 var RosalindProblems = map[string]func(){
-	"dna":  ProblemDna,
-	"rna":  ProblemRna,
-	"revc": ProblemRevc,
+	"dna":  problemDna,
+	"rna":  problemRna,
+	"revc": problemRevc,
 }

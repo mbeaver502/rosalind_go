@@ -4,6 +4,6 @@ import "log"
 
 // TODO: Implement Revc problem
 // https://rosalind.info/problems/revc/
-func ProblemRevc() {
+func problemRevc() {
 	log.Println("Revc Problem")
 }
