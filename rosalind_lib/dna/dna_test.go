@@ -68,7 +68,7 @@ func Test_Dna_CountNucleotides(t *testing.T) {
 		}
 		for k := range gotCNM {
 			if gotCNM[k] != dt.wantMap[k] {
-				t.Errorf("FAIL %s: count nucleotides map does not match on key %+v. want %d; got %d", dt.testName, k, dt.wantMap[k], gotCNM[k])
+				t.Errorf("FAIL %s: count nucleotides map does not match on key '%s'. want %d; got %d", dt.testName, string(k), dt.wantMap[k], gotCNM[k])
 			}
 		}
 	}
