@@ -13,15 +13,12 @@ const (
 
 // Convert the given string s into a slice of Nucleotide.
 func ToSlice(s string) []Nucleotide {
-	// len(s) will give us the number of bytes
-	// instead of the number of runes, but
-	// since our runes are in ASCII, this is okay.
-	nts := make([]Nucleotide, len(s))
-	for i, n := range s {
+	nts := []Nucleotide{}
+	for _, n := range s {
 		nt := Nucleotide(n)
 		switch nt {
-		case Adenine, Cytosine, Guanine, Thymine:
-			nts[i] = nt
+		case Adenine, Cytosine, Guanine, Thymine, Uracil:
+			nts = append(nts, nt)
 		}
 	}
 	return nts
