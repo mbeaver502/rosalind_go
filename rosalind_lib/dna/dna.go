@@ -22,6 +22,9 @@ const (
 	NucleotideT = Nucleotide('T')
 )
 
+// ErrInvalidDnaInput indicates that the provided string
+// represents an invalid sequence of characters and
+// cannot constitute a valid DNA sequence.
 var ErrInvalidDnaInput = errors.New("dna: invalid input string")
 
 // New creates a new Dna instance and returns a pointer to it.
