@@ -3,6 +3,9 @@ package nucleotide
 // Nucleotide represents a single nucleotide in a DNA sequence.
 type Nucleotide rune
 
+// NucleotideSequence represents a sequence of zero or more Nucleotides.
+type NucleotideSequence []Nucleotide
+
 const (
 	Adenine  = Nucleotide('A')
 	Cytosine = Nucleotide('C')
