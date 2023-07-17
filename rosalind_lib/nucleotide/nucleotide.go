@@ -6,6 +6,14 @@ type Nucleotide rune
 // NucleotideSequence represents a sequence of zero or more Nucleotides.
 type NucleotideSequence []Nucleotide
 
+// NucleotideCounts maps the number of appearances of Nucleotides.
+// Example: counts['A'] = 5
+type NucleotideCounts map[Nucleotide]uint
+
+// NucleotideMapping maps one Nucleotide to another.
+// Example: 'A' -> 'T'
+type NucleotideMapping map[Nucleotide]Nucleotide
+
 const (
 	Adenine  = Nucleotide('A')
 	Cytosine = Nucleotide('C')

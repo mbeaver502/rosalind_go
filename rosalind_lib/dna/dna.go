@@ -16,14 +16,6 @@ type Dna struct {
 	dna nt.NucleotideSequence
 }
 
-// NucleotideCounts maps the number of appearances of Nucleotides.
-// Example: counts['A'] = 5
-type NucleotideCounts map[nt.Nucleotide]uint
-
-// NucleotideMapping maps one Nucleotide to another.
-// Example: 'A' -> 'T'
-type NucleotideMapping map[nt.Nucleotide]nt.Nucleotide
-
 // ErrInvalidDnaInput indicates that the provided string
 // represents an invalid sequence of characters and
 // cannot constitute a valid DNA sequence.
@@ -56,7 +48,7 @@ func (d *Dna) String() string {
 }
 
 // CountNucleotides counts the number of nucleotides in the Dna instance.
-func (d *Dna) CountNucleotides() NucleotideCounts {
+func (d *Dna) CountNucleotides() nt.NucleotideCounts {
 	return d.countNucleotides()
 }
 
@@ -76,8 +68,8 @@ func (d *Dna) CountNucleotidesString() string {
 // Count the number of nucleotides in the Dna instance.
 // If the given instance is nil, all counts default to
 // zero values.
-func (d *Dna) countNucleotides() NucleotideCounts {
-	counts := make(NucleotideCounts)
+func (d *Dna) countNucleotides() nt.NucleotideCounts {
+	counts := make(nt.NucleotideCounts)
 	if d == nil {
 		return counts
 	}
@@ -99,7 +91,7 @@ func (d *Dna) Transcribe() (*rna.Rna, error) {
 
 func (d *Dna) ReverseComplement() nt.NucleotideSequence {
 	return reverseComplement(d.dna,
-		NucleotideMapping{
+		nt.NucleotideMapping{
 			nt.Adenine:  nt.Thymine,
 			nt.Thymine:  nt.Adenine,
 			nt.Cytosine: nt.Guanine,
@@ -107,7 +99,7 @@ func (d *Dna) ReverseComplement() nt.NucleotideSequence {
 		})
 }
 
-func reverseComplement(ns nt.NucleotideSequence, mapping NucleotideMapping) nt.NucleotideSequence {
+func reverseComplement(ns nt.NucleotideSequence, mapping nt.NucleotideMapping) nt.NucleotideSequence {
 	rc := make(nt.NucleotideSequence, len(ns))
 	pos := 0
 	for i := len(ns) - 1; i >= 0; i-- {
