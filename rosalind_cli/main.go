@@ -16,7 +16,5 @@ func main() {
 		return
 	}
 
-	// Problem is a required argument,
-	// so need to do a nil-check. Hopefully.
-	problems.RosalindProblems[*problem]()
+	problems.Do(problem)
 }

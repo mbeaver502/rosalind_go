@@ -5,3 +5,9 @@ var RosalindProblems = map[string]func(){
 	"rna":  problemRna,
 	"revc": problemRevc,
 }
+
+func Do(prob *string) {
+	// Problem is a required argument,
+	// so need to do a nil-check. Hopefully.
+	RosalindProblems[*prob]()
+}
