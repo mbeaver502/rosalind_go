@@ -19,7 +19,7 @@ type dnaCountNucleotidesTest struct {
 	testName   string
 	input      string
 	wantString string
-	wantMap    nucleotide.NucleotideCounts
+	wantMap    nucleotide.Counts
 }
 
 var dnaNewTests = []dnaTest{
@@ -28,7 +28,7 @@ var dnaNewTests = []dnaTest{
 		input:    "ACGT",
 		want: &Dna{
 			Dna: "ACGT",
-			dna: nucleotide.NucleotideSequence{
+			dna: nucleotide.Sequence{
 				nucleotide.Adenine,
 				nucleotide.Cytosine,
 				nucleotide.Guanine,
@@ -64,7 +64,7 @@ var dnaCountNucleotidesTests = []dnaCountNucleotidesTest{
 		testName:   "simple string",
 		input:      "ACGT",
 		wantString: "1 1 1 1",
-		wantMap: nucleotide.NucleotideCounts{
+		wantMap: nucleotide.Counts{
 			nucleotide.Adenine:  1,
 			nucleotide.Cytosine: 1,
 			nucleotide.Guanine:  1,
@@ -75,7 +75,7 @@ var dnaCountNucleotidesTests = []dnaCountNucleotidesTest{
 		testName:   "medium string",
 		input:      "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC",
 		wantString: "20 12 17 21",
-		wantMap: nucleotide.NucleotideCounts{
+		wantMap: nucleotide.Counts{
 			nucleotide.Adenine:  20,
 			nucleotide.Cytosine: 12,
 			nucleotide.Guanine:  17,
@@ -86,7 +86,7 @@ var dnaCountNucleotidesTests = []dnaCountNucleotidesTest{
 		testName:   "long string",
 		input:      "GACAAGTAAACTTGAACAAAGGGCCTGTACAGACGGGCTGTCTATAACGCCTGAGTTTGGTAGCCACGTAGGAGCCCGGGGCGCCTTTTAGGAGCAGACTGGTGGCGATCATCCTTGGTCTTACGATGTCTCGGCCTTATGAGTTATGAAAGGCTCCAGCTACTCCGAACAATTCATCGTTAACGTTAGTAGAGAACTAGACGGCATGCCGAGATGCAGTCAATACCGCTCCGTTGAGAGAGTGGTAGAATTGGTAATATACCGGAAGCAGAGCATTTCTTATCCTTGCTGACGCGTAGTTGTTGAAATCCTTGATCGACACTTCCCAGCTCGCAGCAATTTCAATGCCACTCCATCCGGCAAAATATATGAACACCAGGGAAACATACCGTTTGAACTGTACATTGCAGGGGCCCAGCGCATCGCAAATAGTCTCCCGAAGGTGGAGTTTCATAGAATAGATTTTGTTTAACTCACACGTCTGTCCGTGAAGCACATACACTGGCTGTCCTCCGCTGAATTTCACAACGCACCGGATGCTAGCATTGCGCGTTCAGTTGTACGCCCTCGAGTAACGGGGAGTAGGCAGCCCTACTGCTAACAAGTGGGTCTATATGAATGGACAGCAACCAGGCTCAAATCTGCCCTTTAGGAGACTTTGGAACGTACTGCCTATTAGTGTCACGATTATCCGCGGGAAGTACTAATAGGGCTAGGCAACTCCCAGTTTGGCTCGCAACGAATGTCAAGAAATAGAGGACATCCGGAGCAACAAGCCCCCGGGGCCACGCTTCTCCAAGCCCTCACCACCAGCACGTCCTGGCGTGCTGTAGGTATAGGGTGTTTCGTTCG",
 		wantString: "219 215 216 202",
-		wantMap: nucleotide.NucleotideCounts{
+		wantMap: nucleotide.Counts{
 			nucleotide.Adenine:  219,
 			nucleotide.Cytosine: 215,
 			nucleotide.Guanine:  216,

@@ -5,14 +5,14 @@ import (
 	"regexp"
 	"strings"
 
-	nt "github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
+	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
 	"github.com/mbeaver502/rosalind_go/rosalind_lib/rna"
 )
 
 // Dna represents a strand of DNA.
 type Dna struct {
 	Dna string
-	dna nt.NucleotideSequence
+	dna nucleotide.Sequence
 }
 
 // ErrInvalidDnaInput indicates that the provided string
@@ -30,7 +30,7 @@ func New(s string) (*Dna, error) {
 
 	return &Dna{
 		Dna: su,
-		dna: nt.ToSlice(su),
+		dna: nucleotide.ToSlice(su),
 	}, nil
 }
 
@@ -47,7 +47,7 @@ func (d *Dna) String() string {
 }
 
 // CountNucleotides counts the number of nucleotides in the Dna instance.
-func (d *Dna) CountNucleotides() nt.NucleotideCounts {
+func (d *Dna) CountNucleotides() nucleotide.Counts {
 	return d.countNucleotides()
 }
 
@@ -60,16 +60,16 @@ func (d *Dna) CountNucleotidesString() string {
 // Count the number of nucleotides in the Dna instance.
 // If the given instance is nil, all counts default to
 // zero values.
-func (d *Dna) countNucleotides() nt.NucleotideCounts {
-	counts := make(nt.NucleotideCounts)
+func (d *Dna) countNucleotides() nucleotide.Counts {
+	counts := make(nucleotide.Counts)
 	if d == nil {
 		return counts
 	}
 
 	for _, n := range d.Dna {
-		m := nt.Nucleotide(n)
+		m := nucleotide.Nucleotide(n)
 		switch m {
-		case nt.Adenine, nt.Cytosine, nt.Guanine, nt.Thymine:
+		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine, nucleotide.Thymine:
 			counts[m]++
 		}
 	}
@@ -81,18 +81,18 @@ func (d *Dna) Transcribe() (*rna.Rna, error) {
 	return rna.TranscribeFromDna(d.dna)
 }
 
-func (d *Dna) ReverseComplement() nt.NucleotideSequence {
+func (d *Dna) ReverseComplement() nucleotide.Sequence {
 	return reverseComplement(d.dna,
-		nt.NucleotideMapping{
-			nt.Adenine:  nt.Thymine,
-			nt.Thymine:  nt.Adenine,
-			nt.Cytosine: nt.Guanine,
-			nt.Guanine:  nt.Cytosine,
+		nucleotide.Mapping{
+			nucleotide.Adenine:  nucleotide.Thymine,
+			nucleotide.Thymine:  nucleotide.Adenine,
+			nucleotide.Cytosine: nucleotide.Guanine,
+			nucleotide.Guanine:  nucleotide.Cytosine,
 		})
 }
 
-func reverseComplement(ns nt.NucleotideSequence, mapping nt.NucleotideMapping) nt.NucleotideSequence {
-	rc := make(nt.NucleotideSequence, len(ns))
+func reverseComplement(ns nucleotide.Sequence, mapping nucleotide.Mapping) nucleotide.Sequence {
+	rc := make(nucleotide.Sequence, len(ns))
 	pos := 0
 	for i := len(ns) - 1; i >= 0; i-- {
 		rc[pos] = mapping[ns[i]]
