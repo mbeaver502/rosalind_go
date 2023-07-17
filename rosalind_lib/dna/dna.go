@@ -34,9 +34,11 @@ func New(s string) (*Dna, error) {
 		return nil, ErrInvalidDnaInput
 	}
 
+	su := strings.ToUpper(s)
+
 	return &Dna{
-		Dna: strings.ToUpper(s),
-		dna: toNucleotideSlice(s),
+		Dna: su,
+		dna: toNucleotideSlice(su),
 	}, nil
 }
 
