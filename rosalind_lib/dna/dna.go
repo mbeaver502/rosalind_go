@@ -13,7 +13,7 @@ import (
 // Dna represents a strand of DNA.
 type Dna struct {
 	Dna string
-	dna []nucleotide.Nucleotide
+	dna nucleotide.NucleotideSequence
 }
 
 // ErrInvalidDnaInput indicates that the provided string

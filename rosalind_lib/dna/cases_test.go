@@ -28,7 +28,7 @@ var dnaNewTests = []dnaTest{
 		input:    "ACGT",
 		want: &Dna{
 			Dna: "ACGT",
-			dna: []nucleotide.Nucleotide{
+			dna: nucleotide.NucleotideSequence{
 				nucleotide.Adenine,
 				nucleotide.Cytosine,
 				nucleotide.Guanine,

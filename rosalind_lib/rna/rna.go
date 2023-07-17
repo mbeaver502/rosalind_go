@@ -11,7 +11,7 @@ import (
 // Rna represents a strand of RNA.
 type Rna struct {
 	Rna string
-	rna []nucleotide.Nucleotide
+	rna nucleotide.NucleotideSequence
 }
 
 // ErrInvalidRnaInput indicates that the provided string
@@ -34,8 +34,8 @@ func New(s string) (*Rna, error) {
 }
 
 // NewFromDna creates a new Rna instance from the given slice of Nucleotides.
-func TranscribeFromDna(d []nucleotide.Nucleotide) (*Rna, error) {
-	nt := make([]nucleotide.Nucleotide, len(d))
+func TranscribeFromDna(d nucleotide.NucleotideSequence) (*Rna, error) {
+	nt := make(nucleotide.NucleotideSequence, len(d))
 	for i, n := range d {
 		switch n {
 		case nucleotide.Adenine, nucleotide.Cytosine, nucleotide.Guanine:
