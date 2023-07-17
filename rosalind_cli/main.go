@@ -7,12 +7,17 @@ import (
 )
 
 func main() {
-	s := "ACGTaCgTAcGt"
+	s := "GATGGAACTTGACTACGTAAATT"
 	d, err := dna.New(s)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	log.Printf("input:  %s\n", d)
-	log.Printf("output: %s\n", d.CountNucleotidesString())
+	r, err := d.Transcribe()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	log.Printf("dna: %s\n", d)
+	log.Printf("rna: %s\n", r)
 }
