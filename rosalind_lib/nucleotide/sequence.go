@@ -4,7 +4,7 @@ package nucleotide
 type Sequence []Nucleotide
 
 // Convert the given string s into a slice of Nucleotide.
-func ToSlice(s string) Sequence {
+func ToSequence(s string) Sequence {
 	nts := Sequence{}
 	for _, n := range s {
 		nt := Nucleotide(n)

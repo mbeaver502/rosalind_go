@@ -29,7 +29,7 @@ func New(s string) (*Rna, error) {
 
 	return &Rna{
 		Rna: su,
-		rna: nucleotide.ToSlice(su),
+		rna: nucleotide.ToSequence(su),
 	}, nil
 }
 

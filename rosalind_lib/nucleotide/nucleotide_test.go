@@ -57,7 +57,7 @@ func Test_Nucleotide_ToSlice(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got := ToSlice(test.input)
+		got := ToSequence(test.input)
 		if !reflect.DeepEqual(got, test.want) {
 			t.Errorf("FAIL %s: slice lengths do not match. want %+v; got %+v", test.testName, test.want, got)
 		}

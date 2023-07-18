@@ -30,7 +30,7 @@ func New(s string) (*Dna, error) {
 
 	return &Dna{
 		Dna: su,
-		dna: nucleotide.ToSlice(su),
+		dna: nucleotide.ToSequence(su),
 	}, nil
 }
 
