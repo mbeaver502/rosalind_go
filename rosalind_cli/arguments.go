@@ -29,6 +29,26 @@ var arguments = map[string]*argument{
 			Default:  nil,
 		},
 	},
+	"inFile": {
+		short: "i",
+		long:  "input",
+		options: &argparse.Options{
+			Required: false,
+			Validate: nil,
+			Help:     `Specify an input file. Either omit or specify "-" to use stdin`,
+			Default:  "-",
+		},
+	},
+	"outFile": {
+		short: "o",
+		long:  "output",
+		options: &argparse.Options{
+			Required: false,
+			Validate: nil,
+			Help:     `Specify an output file. Either omit or specify "-" to use stdout`,
+			Default:  "-",
+		},
+	},
 }
 
 // Validate the provided problem argument
