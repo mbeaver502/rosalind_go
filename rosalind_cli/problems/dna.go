@@ -12,8 +12,6 @@ type problemDna struct{}
 // Do processes the dna problem.
 // https://rosalind.info/problems/dna/
 func (pd problemDna) Do(inFile, outFile *os.File) error {
-	fmt.Println("Counting DNA Nucleotides")
-
 	input := ""
 	if inFile == os.Stdin {
 		fmt.Println("Input:")

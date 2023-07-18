@@ -13,8 +13,6 @@ type problemHamm struct{}
 // Do processes the hamm problem.
 // https://rosalind.info/problems/hamm/
 func (ph problemHamm) Do(inFile, outFile *os.File) error {
-	fmt.Println("Counting Point Mutations")
-
 	if inFile == os.Stdin {
 		fmt.Println("Input:")
 	}
