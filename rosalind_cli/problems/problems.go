@@ -9,12 +9,17 @@ type rosalindProblem interface {
 	Do(inFile, outFile *os.File) error
 }
 
+// RosalindProblems maps input arguments to Rosalind problem
+// types that will read an input, process the problem, and
+// write results, if any, to an output.
 var RosalindProblems = map[string]rosalindProblem{
 	"dna":  problemDna{},
 	"rna":  problemRna{},
 	"revc": problemRevc{},
 }
 
+// Do processes the specified problem for the given
+// input and output files.
 func Do(prob, inFile, outFile *string) error {
 	input, err := getInFile(inFile)
 	if err != nil {

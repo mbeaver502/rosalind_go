@@ -9,6 +9,7 @@ import (
 
 type problemRevc struct{}
 
+// Do processes the revc problem.
 // https://rosalind.info/problems/revc/
 func (pr problemRevc) Do(inFile, outFile *os.File) error {
 	fmt.Println("Complementing a Strand of DNA")

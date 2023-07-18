@@ -9,6 +9,7 @@ import (
 
 type problemRna struct{}
 
+// Do processes the rna problem.
 // https://rosalind.info/problems/rna/
 func (pr problemRna) Do(inFile, outFile *os.File) error {
 	fmt.Println("Transcribing DNA into RNA")
