@@ -30,12 +30,7 @@ func Do(prob, inFile, outFile *string) error {
 
 	// Problem is a required argument,
 	// so no need to do a nil-check. Hopefully.
-	err = RosalindProblems[*prob].Do(input, output)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return RosalindProblems[*prob].Do(input, output)
 }
 
 func getInFile(f *string) (*os.File, error) {
