@@ -1,5 +1,7 @@
 package utils
 
+// HammingDistance calculates the number of differing
+// characters between two strings s and t.
 func HammingDistance(s, t string) int {
 	if len(s) != len(t) {
 		return 0
