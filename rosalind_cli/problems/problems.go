@@ -2,6 +2,7 @@ package problems
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -16,6 +17,7 @@ var RosalindProblems = map[string]rosalindProblem{
 	"dna":  problemDna{},
 	"rna":  problemRna{},
 	"revc": problemRevc{},
+	"hamm": problemHamm{},
 }
 
 // Do processes the specified problem for the given
@@ -73,5 +75,10 @@ func writeOutput(output string, f *os.File) error {
 	if _, err := w.WriteString(output); err != nil {
 		return err
 	}
+
+	if f != os.Stdout {
+		fmt.Printf("Writing to %s\n", f.Name())
+	}
+
 	return w.Flush()
 }
