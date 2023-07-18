@@ -2,6 +2,7 @@ package rna
 
 import (
 	"errors"
+	"fmt"
 	"regexp"
 	"strings"
 
@@ -60,5 +61,5 @@ func isValidString(s string) bool {
 
 // String returns a string version of the Rna instance.
 func (r *Rna) String() string {
-	return r.Rna
+	return fmt.Sprintf("%s\n", r.Rna)
 }

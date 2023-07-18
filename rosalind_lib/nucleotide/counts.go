@@ -10,7 +10,7 @@ type Counts map[Nucleotide]uint
 // Currently only returns DNA nucleotides.
 func (nc Counts) String() string {
 	return fmt.Sprintf(
-		"%d %d %d %d",
+		"%d %d %d %d\n",
 		nc[Adenine],
 		nc[Cytosine],
 		nc[Guanine],

@@ -1,5 +1,7 @@
 package nucleotide
 
+import "fmt"
+
 // Sequence represents a sequence of zero or more Nucleotides.
 type Sequence []Nucleotide
 
@@ -18,5 +20,5 @@ func ToSequence(s string) Sequence {
 
 // String returns the string representation of the NucleotideSequence.
 func (ns Sequence) String() string {
-	return string(ns)
+	return fmt.Sprintf("%s\n", string(ns))
 }
