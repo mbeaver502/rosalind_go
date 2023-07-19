@@ -5,6 +5,8 @@ import (
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/mbeaver502/rosalind_go/rosalind_lib/dna"
 )
 
 // FastaEntry represents a FASTA-format entry.
@@ -54,4 +56,18 @@ func ReadFastaContent(f *os.File) FastaContent {
 	}
 
 	return content
+}
+
+// FastaToDna converts the given FastaContent to a
+// slice of pointers to dna.Dna instances.
+func FastaToDna(fc FastaContent) ([]*dna.Dna, error) {
+	out := []*dna.Dna{}
+	for _, entry := range fc {
+		d, err := dna.New(entry.Content)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, d)
+	}
+	return out, nil
 }
