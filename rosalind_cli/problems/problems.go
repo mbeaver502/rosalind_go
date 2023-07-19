@@ -18,6 +18,7 @@ var RosalindProblems = map[string]rosalindProblem{
 	"rna":  problemRna{},
 	"revc": problemRevc{},
 	"hamm": problemHamm{},
+	"gc":   problemGc{},
 }
 
 // Do processes the specified problem for the given
