@@ -105,3 +105,15 @@ func reverseComplement(ns nucleotide.Sequence, mapping nucleotide.Mapping) nucle
 func (d *Dna) Iter() *nucleotide.SequenceIterator {
 	return d.dna.Iter()
 }
+
+func (d *Dna) GcContent() float64 {
+	totalLen := len(d.dna)
+	count := 0
+	for it := d.Iter(); it.HasNext(); it = it.Next() {
+		val := it.Value()
+		if *val == nucleotide.Guanine || *val == nucleotide.Cytosine {
+			count++
+		}
+	}
+	return float64(count) / float64(totalLen) * 100.0
+}
