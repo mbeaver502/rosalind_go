@@ -45,24 +45,14 @@ func getInFile(f *string) (*os.File, error) {
 	if f == nil || *f == "-" {
 		return os.Stdin, nil
 	}
-
-	file, err := os.OpenFile(*f, os.O_RDONLY, os.ModeType)
-	if err != nil {
-		return nil, err
-	}
-	return file, nil
+	return os.OpenFile(*f, os.O_RDONLY, os.ModeType)
 }
 
 func getOutFile(f *string) (*os.File, error) {
 	if f == nil || *f == "-" {
 		return os.Stdout, nil
 	}
-
-	file, err := os.Create(*f)
-	if err != nil {
-		return nil, err
-	}
-	return file, nil
+	return os.Create(*f)
 }
 
 func readInput(f *os.File) string {
