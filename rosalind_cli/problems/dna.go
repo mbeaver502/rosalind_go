@@ -23,9 +23,5 @@ func (pd problemDna) Do(inFile, outFile *os.File) error {
 		return err
 	}
 
-	if outFile == os.Stdout {
-		fmt.Println("Output:")
-	}
-
 	return writeOutput(d.CountNucleotidesString(), outFile)
 }

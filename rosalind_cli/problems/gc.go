@@ -51,9 +51,5 @@ func (pg problemGc) Do(inFile, outFile *os.File) error {
 
 	output := fmt.Sprintf("%s\n%f\n", maxItem.entry.Label, maxItem.gcContent)
 
-	if outFile == os.Stdout {
-		fmt.Println("Output:")
-	}
-
 	return writeOutput(output, outFile)
 }

@@ -23,10 +23,6 @@ func (pr problemRna) Do(inFile, outFile *os.File) error {
 		return err
 	}
 
-	if outFile == os.Stdout {
-		fmt.Println("Output:")
-	}
-
 	r, err := d.Transcribe()
 	if err != nil {
 		return err

@@ -18,10 +18,6 @@ func (ph problemHamm) Do(inFile, outFile *os.File) error {
 	}
 	input := readLines(inFile, 2)
 
-	if outFile == os.Stdout {
-		fmt.Println("Output:")
-	}
-
 	return writeOutput(
 		fmt.Sprintf("%d\n", utils.HammingDistance(input[0], input[1])),
 		outFile,
