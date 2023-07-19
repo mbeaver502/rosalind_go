@@ -100,3 +100,8 @@ func reverseComplement(ns nucleotide.Sequence, mapping nucleotide.Mapping) nucle
 	}
 	return rc
 }
+
+// Iter returns an iterator on the internal Nucleotide Sequence.
+func (d *Dna) Iter() *nucleotide.SequenceIterator {
+	return d.dna.Iter()
+}

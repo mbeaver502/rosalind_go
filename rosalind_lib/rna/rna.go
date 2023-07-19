@@ -63,3 +63,8 @@ func isValidString(s string) bool {
 func (r *Rna) String() string {
 	return fmt.Sprintf("%s\n", r.Rna)
 }
+
+// Iter returns an iterator on the internal Nucleotide Sequence.
+func (r *Rna) Iter() *nucleotide.SequenceIterator {
+	return r.rna.Iter()
+}
