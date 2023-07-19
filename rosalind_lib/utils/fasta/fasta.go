@@ -30,7 +30,7 @@ func ReadFastaContent(f *os.File) FastaContent {
 				content = append(content, entry)
 				sb.Reset()
 			}
-			entry.Label = line
+			entry.Label = line[1:]
 		} else {
 			sb.WriteString(line)
 		}
