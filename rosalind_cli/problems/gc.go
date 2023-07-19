@@ -28,10 +28,23 @@ func (pg problemGc) Do(inFile, outFile *os.File) error {
 		return errors.New("gc: insufficient input")
 	}
 
-	d, err := dna.New(input[0].Content)
+	maxItem, err := pg.getMaxFasta(input)
 	if err != nil {
 		return err
 	}
+
+	return writeOutput(
+		fmt.Sprintf("%s\n%f\n", maxItem.entry.Label, maxItem.gcContent),
+		outFile,
+	)
+}
+
+func (pg problemGc) getMaxFasta(input fasta.FastaContent) (*maxFastaEntry, error) {
+	d, err := dna.New(input[0].Content)
+	if err != nil {
+		return nil, err
+	}
+
 	maxItem := &maxFastaEntry{
 		entry:     input[0],
 		gcContent: d.GcContent(),
@@ -40,7 +53,7 @@ func (pg problemGc) Do(inFile, outFile *os.File) error {
 	for _, item := range input[1:] {
 		d, err := dna.New(item.Content)
 		if err != nil {
-			return err
+			return nil, err
 		}
 		thisGc := d.GcContent()
 		if thisGc > maxItem.gcContent {
@@ -49,7 +62,5 @@ func (pg problemGc) Do(inFile, outFile *os.File) error {
 		}
 	}
 
-	output := fmt.Sprintf("%s\n%f\n", maxItem.entry.Label, maxItem.gcContent)
-
-	return writeOutput(output, outFile)
+	return maxItem, nil
 }
