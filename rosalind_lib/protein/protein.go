@@ -1,6 +1,7 @@
 package protein
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -29,6 +30,20 @@ var translationMap = map[string]AminoAcid{
 	"UGG": W, "CGG": R, "AGG": R, "GGG": G,
 }
 
+// New creates a new Protein from the given string.
+// The string should contain valid amino acids only.
+func New(s string) (Protein, error) {
+	if !isValidAminoAcid(s) {
+		return Protein{}, errors.New("protein: invalid input")
+	}
+
+	p := Protein{}
+	for _, a := range s {
+		p = append(p, AminoAcid(a))
+	}
+	return p, nil
+}
+
 // Translate will translate the given Sequence into Protein.
 func Translate(ns nucleotide.Sequence) Protein {
 	out := Protein{}
@@ -50,4 +65,13 @@ func (p Protein) String() string {
 		sb.WriteRune(rune(a))
 	}
 	return fmt.Sprintf("%s\n", sb.String())
+}
+
+// Mass calculates monoisotopic mass of the Protein p.
+func (p Protein) Mass() float64 {
+	mass := float64(0)
+	for _, a := range p {
+		mass += monoisotopicMass[a]
+	}
+	return mass
 }
