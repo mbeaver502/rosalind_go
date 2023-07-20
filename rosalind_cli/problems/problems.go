@@ -21,6 +21,7 @@ var RosalindProblems = map[string]rosalindProblem{
 	"gc":   problemGc{},
 	"subs": problemSubs{},
 	"cons": problemCons{},
+	"prot": problemProt{},
 }
 
 // Do processes the specified problem for the given
