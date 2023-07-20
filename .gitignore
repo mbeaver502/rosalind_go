@@ -23,3 +23,6 @@ go.work
 # VS Code settings
 .vscode
 *.code-workspace
+
+# Mac OS
+.DS_Store
