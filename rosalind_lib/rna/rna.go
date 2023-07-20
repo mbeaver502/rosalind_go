@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/mbeaver502/rosalind_go/rosalind_lib/nucleotide"
+	"github.com/mbeaver502/rosalind_go/rosalind_lib/protein"
 )
 
 // Rna represents a strand of RNA.
@@ -67,4 +68,8 @@ func (r *Rna) String() string {
 // Iter returns an iterator on the internal Nucleotide Sequence.
 func (r *Rna) Iter() *nucleotide.SequenceIterator {
 	return r.rna.Iter()
+}
+
+func (r *Rna) Translate() protein.Protein {
+	return protein.Translate(r.rna)
 }
