@@ -106,6 +106,8 @@ func (d *Dna) Iter() *nucleotide.SequenceIterator {
 	return d.dna.Iter()
 }
 
+// GcContent calculates the relative Guanine and Cytosine
+// content of the Dna instance.
 func (d *Dna) GcContent() float64 {
 	totalLen := len(d.dna)
 	count := 0
